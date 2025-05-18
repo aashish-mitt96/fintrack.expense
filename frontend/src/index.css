@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: #1e293b; /* Tailwind's slate-800 */
+  background-color: #f8fafc; /* Tailwind's slate-50 */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* Elegant blue-tinted gradient background */
+  background-image: linear-gradient(
+    to bottom right,
+    #f8fafc,   /* slate-50 */
+    #e0f2fe,   /* sky-100 */
+    #dbeafe    /* blue-100 */
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  color: #1e293b; /* slate-800 for readable dark text */
+}
