@@ -1,18 +1,11 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import HeroSection from '../components/HeroSection'
-import FeatureSection from '../components/FeatureSection'
-import HowItWorks from '../components/HowItWorks'
+import LandingSection from "../components/LandingSection";
 
 const HomePage = () => {
   return (
     <>
-        {/* <Navbar/> */}
-        <HeroSection/>
-        <FeatureSection/>
-        <HowItWorks/>
+      <LandingSection/>
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
