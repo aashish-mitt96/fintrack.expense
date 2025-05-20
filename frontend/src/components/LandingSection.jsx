@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "../assets/logo.png";
 import { useState } from "react";
 
-// Add these styles globally or in a CSS module
 const styles = `
   @keyframes gradientShift {
     0% { background-position: 0% 50%; }
@@ -28,6 +27,76 @@ const styles = `
   }
 `;
 
+const Sidebar = ({ isOpen, onClose }) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black z-40"
+          />
+
+          {/* Side Panel */}
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "tween" }}
+            className="fixed top-0 left-0 bottom-0 w-64 bg-gray-900 text-gray-300 shadow-lg z-50 flex flex-col p-6"
+          >
+            <button
+              onClick={onClose}
+              className="self-end mb-6 text-cyan-400 hover:text-cyan-500 font-bold text-lg"
+            >
+              &times; {/* Close icon */}
+            </button>
+
+            <ul className="space-y-6 text-lg font-semibold tracking-wide">
+              {[
+                "Home",
+                "Features",
+                "Pricing",
+                "How It Works",
+                "About Us",
+                "Contact Us",
+                "FAQs",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="hover:text-cyan-400 cursor-pointer transition"
+                  onClick={onClose} // close sidebar on click
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-auto space-y-4">
+              <button
+                onClick={() => (window.location.href = "/login")}
+                className="w-full h-10 bg-cyan-500 text-black font-semibold rounded-md shadow-lg hover:bg-cyan-400 hover:shadow-cyan-400/80 transition"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => (window.location.href = "/get-started")}
+                className="w-full h-10 border border-cyan-500 text-cyan-500 font-semibold rounded-md hover:bg-cyan-500 hover:text-black transition"
+              >
+                Get Started
+              </button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,9 +105,9 @@ const Navbar = () => {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed w-full bg-transparent z-50"
+      className="w-full z-50 "
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
+      <div className="max-w-7xl mx-auto flex justify-between items-center p-4 md:-mt-45 -mt-70">
         {/* Logo + FinTrack text */}
         <div className="flex items-center space-x-1 cursor-pointer select-none">
           <img src={logo} alt="FinTrack Logo" className="w-11" />
@@ -48,13 +117,28 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Nav links */}
-        <ul className="hidden md:flex space-x-10 text-gray-300 font-semibold tracking-wide items-center">
-          <li className="hover:text-cyan-400 cursor-pointer transition">Home</li>
-          <li className="hover:text-cyan-400 cursor-pointer transition">Features</li>
-          <li className="hover:text-cyan-400 cursor-pointer transition">How It Works</li>
-          <li className="hover:text-cyan-400 cursor-pointer transition">About Us</li>
-          <li className="hover:text-cyan-400 cursor-pointer transition">Contact Us</li>
-        </ul>
+        <div className="hidden md:flex bg-blue-500/30 rounded-xl shadow-md border border-cyan-400 px-6 py-2">
+          <ul className="flex space-x-10 text-white font-semibold tracking-wide items-center">
+            <li className="hover:text-cyan-300 cursor-pointer transition">
+              Home
+            </li>
+            <li className="hover:text-cyan-300 cursor-pointer transition">
+              Features
+            </li>
+            <li className="hover:text-cyan-300 cursor-pointer transition">
+              Pricing
+            </li>
+            <li className="hover:text-cyan-300 cursor-pointer transition">
+              How It Works
+            </li>
+            <li className="hover:text-cyan-300 cursor-pointer transition">
+              About Us
+            </li>
+            <li className="hover:text-cyan-300 cursor-pointer transition">
+              Contact Us
+            </li>
+          </ul>
+        </div>
 
         {/* Desktop Right buttons */}
         <div className="hidden md:flex space-x-4">
@@ -75,46 +159,23 @@ const Navbar = () => {
         {/* Mobile menu toggle button */}
         <button
           className="md:hidden px-4 py-2 border rounded text-cyan-400 border-cyan-400 hover:bg-cyan-400 hover:text-black transition"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen(true)}
+          aria-label="Open menu"
         >
           Menu
         </button>
       </div>
 
-      {/* Mobile dropdown menu */}
-      {isOpen && (
-        <div className="md:hidden bg-gray-900 text-gray-300 space-y-4 px-6 py-4">
-          <ul className="space-y-2 font-semibold tracking-wide">
-            <li className="hover:text-cyan-400 cursor-pointer transition">Home</li>
-            <li className="hover:text-cyan-400 cursor-pointer transition">Features</li>
-            <li className="hover:text-cyan-400 cursor-pointer transition">How It Works</li>
-            <li className="hover:text-cyan-400 cursor-pointer transition">About Us</li>
-            <li className="hover:text-cyan-400 cursor-pointer transition">Contact Us</li>
-          </ul>
-          <div className="pt-4 space-y-2">
-            <button
-              className="w-full h-10 bg-cyan-500 text-black font-semibold rounded-md shadow-lg hover:bg-cyan-400 hover:shadow-cyan-400/80 transition"
-              onClick={() => (window.location.href = "/login")}
-            >
-              Login
-            </button>
-            <button
-              className="w-full h-10 border border-cyan-500 text-cyan-500 font-semibold rounded-md hover:bg-cyan-500 hover:text-black transition"
-              onClick={() => (window.location.href = "/get-started")}
-            >
-              Get Started
-            </button>
-          </div>
-        </div>
-      )}
+      {/* Sidebar for mobile */}
+      <Sidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </motion.nav>
   );
 };
 
-
 const Hero = () => {
   return (
     <section className="relative pt-10 min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-gray-900 via-blue-900 to-black text-white overflow-hidden">
+      <Navbar />
       {/* Floating blurred circles */}
       <div className="absolute top-20 left-10 w-60 h-60 bg-cyan-500 rounded-full filter blur-3xl opacity-30 animate-float-slow"></div>
       <div
@@ -149,7 +210,7 @@ const Hero = () => {
       >
         Get Started
       </motion.button>
-      {/* User count social proof */}
+
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -166,10 +227,7 @@ const Hero = () => {
 export default function LandingSection() {
   return (
     <>
-      {/* Inject styles */}
       <style>{styles}</style>
-
-      <Navbar />
       <Hero />
     </>
   );
