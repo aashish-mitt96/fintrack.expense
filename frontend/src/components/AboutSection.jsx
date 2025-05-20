@@ -27,7 +27,7 @@ const highlights = [
 
 const AboutSection = () => {
   return (
-    <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-blue-950 animate-gradientShift text-white py-24 px-6">
+    <section id="about" className="bg-gradient-to-br from-gray-900 via-blue-900 to-blue-950 animate-gradientShift text-white py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

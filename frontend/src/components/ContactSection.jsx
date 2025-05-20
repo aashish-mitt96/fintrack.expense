@@ -3,7 +3,10 @@ import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const ContactSection = () => {
   return (
-    <section className="bg-gradient-to-b from-cyan-50 to-white py-24 px-6">
+    <section
+      id="contact"
+      className="bg-gradient-to-b from-cyan-50 to-white py-24 px-6"
+    >
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         {/* Left Info Panel */}
         <motion.div
@@ -16,8 +19,9 @@ const ContactSection = () => {
             Contact <span className="text-cyan-600">Us</span>
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed max-w-lg">
-            We’d love to hear from you! Whether you have a question about features,
-            pricing, or anything else, our team is ready to answer all your questions.
+            We'd love to hear from you! Whether you have a question about
+            features, working, or anything else, our team is ready to answer all
+            your questions.
           </p>
 
           <div className="space-y-6">
@@ -28,10 +32,10 @@ const ContactSection = () => {
               <div>
                 <h4 className="text-gray-900 font-semibold text-lg">Email</h4>
                 <a
-                  href="mailto:support@fintrackapp.com"
+                  href="mailto:aashishrbmittal@gmail.com"
                   className="text-cyan-600 hover:underline"
                 >
-                  support@fintrackapp.com
+                  aashishrbmittal@gmail.com
                 </a>
               </div>
             </div>
@@ -42,8 +46,11 @@ const ContactSection = () => {
               </div>
               <div>
                 <h4 className="text-gray-900 font-semibold text-lg">Phone</h4>
-                <a href="tel:+1234567890" className="text-cyan-600 hover:underline">
-                  +1 (234) 567-890
+                <a
+                  href="tel:+918176034547"
+                  className="text-cyan-600 hover:underline"
+                >
+                  +91 8176034547
                 </a>
               </div>
             </div>
@@ -55,8 +62,9 @@ const ContactSection = () => {
               <div>
                 <h4 className="text-gray-900 font-semibold text-lg">Address</h4>
                 <address className="not-italic text-gray-700">
-                  123 FinTrack Ave,<br />
-                  Finance City, FC 45678
+                  Mittal Firm,
+                  <br />
+                  Gorakhpur City, India
                 </address>
               </div>
             </div>

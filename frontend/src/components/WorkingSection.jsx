@@ -102,8 +102,9 @@ const WorkingSection = () => {
 
         {/* Testimonial */}
         <p className="mt-8 italic text-indigo-700 max-w-xl mx-auto leading-relaxed">
-          "FinTrack changed the way I manage my money — simple, insightful, and always reliable."
-          <br />— Ashish Mittal, Happy User
+          "FinTrack changed the way I manage my money — simple, insightful, and
+          always reliable."
+          <br />— Ashish Mittal, Happy FinTrack User
         </p>
       </div>
 

@@ -26,7 +26,7 @@ const features = [
 
 const FeatureSection = () => {
   return (
-    <section className="bg-gradient-to-b from-cyan-50 to-white py-24 px-6">
+    <section id="features" className="bg-gradient-to-b from-cyan-50 to-white py-24 px-6">
       <div className="max-w-7xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
 import { MdVerified } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const benefits = [
   "Unlimited access to all features",
@@ -12,8 +13,9 @@ const benefits = [
 ];
 
 const PricingSection = () => {
+  const navigate = useNavigate()
   return (
-    <section className="bg-gradient-to-br from-gray-900 via-blue-900 to-blue-950 animate-gradientShift text-white py-24 px-6">
+    <section id="pricing" className="bg-gradient-to-br from-gray-900 via-blue-900 to-blue-950 animate-gradientShift text-white py-24 px-6">
       <div className="max-w-6xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -48,11 +50,11 @@ const PricingSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             {/* Left Column - Price Info */}
             <div className="text-center md:text-left">
-              <div className="text-6xl font-bold text-cyan-700">$0</div>
+              <div className="text-6xl font-bold text-cyan-700"> ₹0</div>
               <div className="mt-2 text-lg font-medium text-gray-600">No credit card required</div>
               <div className="mt-6 hidden md:block">
                 <button
-                  onClick={() => (window.location.href = "/get-started")}
+                  onClick={() => navigate("/signup")}
                   className="bg-cyan-700 hover:bg-cyan-600 text-white font-bold text-lg py-3 px-6 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
                 >
                   Get Started For Free
