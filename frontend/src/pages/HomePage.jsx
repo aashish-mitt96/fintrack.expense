@@ -1,10 +1,11 @@
-import AboutSection from "../components/AboutSection";
-import ContactUsSection from "../components/ContactSection";
-import FaqAndFooter from "../components/FaqSection";
-import FeatureSection from "../components/FeatureSection";
 import LandingSection from "../components/LandingSection";
+import FeatureSection from "../components/FeatureSection";
 import PricingSection from "../components/PricingSection";
 import WorkingSection from "../components/WorkingSection";
+import AboutSection from "../components/AboutSection";
+import ContactUsSection from "../components/ContactSection";
+import FooterSection from "../components/FooterSection";
+import LoginPage from "./LoginPage";
 
 const HomePage = () => {
   return (
@@ -15,7 +16,7 @@ const HomePage = () => {
       <WorkingSection/>
       <AboutSection/>
       <ContactUsSection/>
-      <FaqAndFooter/>
+      <FooterSection/>
     </>
   );
 };

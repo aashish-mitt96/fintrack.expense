@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const HeaderSection = () => {
   const navigate = useNavigate();
   return (
     <motion.nav
@@ -113,4 +113,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default HeaderSection;

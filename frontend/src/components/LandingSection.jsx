@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
+import HeaderSection from "./HeaderSection";
 
 const styles = `
   @keyframes gradientShift {
@@ -29,8 +29,8 @@ const LandingSection = () => {
   return (
     <>
       <style>{styles}</style>
-      <section className="relative pt-10 min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-gray-900 via-blue-900 to-black text-white overflow-hidden">
-        <Navbar />
+      <section id="home" className="relative pt-10 min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-gray-900 via-blue-900 to-black text-white overflow-hidden">
+        <HeaderSection/>
         {/* Floating blurred circles */}
         <div className="absolute top-20 left-10 w-60 h-60 bg-cyan-500 rounded-full filter blur-3xl opacity-30 animate-float-slow"></div>
         <div
