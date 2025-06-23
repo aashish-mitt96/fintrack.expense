@@ -61,10 +61,10 @@ const LandingSection = () => {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.7, delay: 1 }}
-          onClick={() => navigate("/signup")}
-          className="mt-12 px-12 py-4 bg-cyan-500 text-black font-semibold rounded-full shadow-xl hover:shadow-cyan-400/80 hover:bg-cyan-400 transition transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-cyan-400"
+          onClick={() => navigate("/register-business")}
+          className="mt-12 px-8 py-3 text-xl bg-cyan-500 text-black font-semibold rounded-full shadow-xl hover:shadow-cyan-400/80 hover:bg-cyan-400 transition transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-cyan-400"
         >
-          Get Started
+          Register Business
         </motion.button>
         {/* Final Quote */}
         <motion.p

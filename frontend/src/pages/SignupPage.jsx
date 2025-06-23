@@ -1,16 +1,17 @@
 import { useState } from "react";
-import Signin from "../assets/Signin.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaLinkedin } from "react-icons/fa";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import Signin from "../assets/Signin.png";
 
 export default function SignupPage() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
-    role: "viewer",
   });
 
   const [errors, setErrors] = useState({});
@@ -28,8 +29,6 @@ export default function SignupPage() {
     if (!form.password) errs.password = "Password is required";
     else if (form.password.length < 6)
       errs.password = "Password must be at least 6 characters";
-    if (!["viewer", "accountant", "admin"].includes(form.role))
-      errs.role = "Invalid role selected";
     return errs;
   };
 
@@ -47,10 +46,23 @@ export default function SignupPage() {
     }
     setLoading(true);
     try {
-      // Simulate API call
-      await new Promise((r) => setTimeout(r, 1500));
+      const res = await fetch("/api/registerBusiness", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        alert(errorData.message || "Signup failed");
+        setLoading(false);
+        return;
+      }
+
+      const data = await res.json();
       alert("Signup successful! You can now login.");
-      setForm({ name: "", email: "", password: "", role: "viewer" });
+      setForm({ name: "", email: "", password: "" });
+      navigate("/login");
     } catch (error) {
       alert("Something went wrong. Please try again.");
     } finally {
@@ -125,24 +137,14 @@ export default function SignupPage() {
                 id="name"
                 name="name"
                 type="text"
-                aria-invalid={errors.name ? "true" : "false"}
-                aria-describedby="name-error"
                 value={form.name}
                 onChange={handleChange}
-                placeholder="Your full name"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition ${
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${
                   errors.name ? "border-red-500" : "border-gray-300"
                 }`}
-                required
               />
               {errors.name && (
-                <p
-                  id="name-error"
-                  className="text-red-600 text-xs mt-1"
-                  role="alert"
-                >
-                  {errors.name}
-                </p>
+                <p className="text-red-600 text-xs mt-1">{errors.name}</p>
               )}
             </div>
 
@@ -158,24 +160,14 @@ export default function SignupPage() {
                 id="email"
                 name="email"
                 type="email"
-                aria-invalid={errors.email ? "true" : "false"}
-                aria-describedby="email-error"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="Enter Email Address"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition ${
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${
                   errors.email ? "border-red-500" : "border-gray-300"
                 }`}
-                required
               />
               {errors.email && (
-                <p
-                  id="email-error"
-                  className="text-red-600 text-xs mt-1"
-                  role="alert"
-                >
-                  {errors.email}
-                </p>
+                <p className="text-red-600 text-xs mt-1">{errors.email}</p>
               )}
             </div>
 
@@ -191,97 +183,54 @@ export default function SignupPage() {
                 id="password"
                 name="password"
                 type={showPassword ? "text" : "password"}
-                aria-invalid={errors.password ? "true" : "false"}
-                aria-describedby="password-error"
                 value={form.password}
                 onChange={handleChange}
-                placeholder="Create a password"
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition ${
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 }`}
-                required
               />
               <button
                 type="button"
-                onClick={() => setShowPassword((show) => !show)}
-                className="absolute right-3 top-3 text-gray-500 hover:text-gray-700 focus:outline-none"
-                aria-label={showPassword ? "Hide password" : "Show password"}
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-3 text-gray-500"
               >
-                {showPassword ? (
-                  <AiFillEyeInvisible className="w-5 h-5" />
-                ) : (
-                  <AiFillEye className="w-5 h-5" />
-                )}
+                {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
               </button>
               {errors.password && (
-                <p
-                  id="password-error"
-                  className="text-red-600 text-xs mt-1"
-                  role="alert"
-                >
-                  {errors.password}
-                </p>
+                <p className="text-red-600 text-xs mt-1">{errors.password}</p>
               )}
-            </div>
-
-            {/* Role */}
-            <div>
-              <label
-                htmlFor="role"
-                className="block text-sm font-medium text-gray-600 mb-1"
-              >
-                Role
-              </label>
-              <select
-                id="role"
-                name="role"
-                value={form.role}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
-                required
-              >
-                <option value="viewer">Viewer</option>
-                <option value="accountant">Accountant</option>
-                <option value="admin">Admin</option>
-              </select>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-3 font-semibold rounded-lg transition focus:outline-none focus:ring-2 focus:ring-offset-1 ${
+              className={`w-full py-3 font-semibold rounded-lg focus:outline-none focus:ring-2 transition ${
                 loading
                   ? "bg-blue-400 cursor-not-allowed text-white"
                   : "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-600"
               }`}
-              aria-live="polite"
             >
               {loading ? "Signing Up..." : "Sign Up"}
             </button>
           </form>
 
           <div className="mt-6 flex justify-center gap-4 text-gray-500">
-            <button
-              type="button"
-              aria-label="Sign up with Google"
-              className="flex items-center gap-1 border px-3 py-2 rounded hover:bg-gray-100 transition"
-            >
+            <button className="flex items-center gap-1 border px-3 py-2 rounded hover:bg-gray-100">
               <FcGoogle size={20} />
               Google
             </button>
-            <button
-              type="button"
-              aria-label="Sign up with LinkedIn"
-              className="flex items-center gap-1 border px-3 py-2 rounded hover:bg-gray-100 transition"
-            >
-              <FaLinkedin size={20} className="text-blue-700" />
+            <button className="flex items-center gap-1 border px-3 py-2 rounded hover:bg-gray-100">
+              <FaLinkedin size={20} color="#0077b5" />
               LinkedIn
             </button>
           </div>
 
-          <p className="mt-8 text-center text-sm text-gray-600">
+          <p className="mt-6 text-center text-gray-500 text-sm">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-600 hover:underline">
+            <Link
+              to="/login"
+              className="text-blue-600 hover:underline font-semibold"
+            >
               Log in
             </Link>
           </p>
